@@ -10,7 +10,7 @@ class Repository{
 
 }
 //List of Hardcoded Game objects, Drawable is set using Databinding
-val hardCodedGames=listOf(
+private val hardCodedGames=listOf(
     Game(0, "Prey", R.drawable.vector_asset_launcher_default),
     Game(1, "SOMA", R.drawable.vector_asset_launcher_blue),
     Game(2, "Far Cry 3", R.drawable.vector_asset_launcher_green),

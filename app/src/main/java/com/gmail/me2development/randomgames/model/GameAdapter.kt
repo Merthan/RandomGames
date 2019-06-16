@@ -11,7 +11,7 @@ import com.gmail.me2development.randomgames.databinding.LayoutGameItemCardviewBi
 
 
 //Class extends ListAdapter which is a (native) solution for getting Recyclerview animations when items change
-//In this case, We have Games which have Ratings that change
+//In this case, We have Games which have Ratings that change and that cause reordering
 class GameAdapter : ListAdapter<Game, GameAdapter.ViewHolder>(diffGameItemCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -45,7 +45,8 @@ private fun Game.hasSameContent(gameItem: Game): Boolean {
 }
 
 //Used to set resources using android:src attribute in XML,
-// otherwise the Resource Int gets set as a color instead like #FFF
+// otherwise the Resource Int gets set as a color instead like #FFF.
+//It's used while binding Game image resources to the views, which is why the BindingAdapter is here
 @BindingAdapter("android:src")
 fun setImageViewResource(imageView: ImageView, resource: Int) {
     imageView.setImageResource(resource)

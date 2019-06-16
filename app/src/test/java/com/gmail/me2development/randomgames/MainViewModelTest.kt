@@ -64,7 +64,7 @@ class MainViewModelTest : KoinTest{
         )
 
         //Thanks to Kotlin, == works here (not related to object references but to content)
-        assert(unsortedList.sortedByRating()==manuallySortedList)
+        assert(unsortedList.sortedByRating() == manuallySortedList)
     }
 
     @Test
@@ -80,6 +80,34 @@ class MainViewModelTest : KoinTest{
     fun checkIfGameListFromRepositoryIsNeitherNullOrEmpty(){
         assert(!viewModel.gameList.value.isNullOrEmpty())
     }
+
+    //Test created to check what happens when two games have the same rating, a edge condition
+    @Test
+    fun checkSortingWithEqualRatingsInAList(){
+
+        val unsortedList=listOf(
+            createGame(0,4.5f),
+            createGame(1,4.5f),
+            createGame(2,3.5f),
+            createGame(3,5.0f),
+            createGame(4,5.0f),
+            createGame(5,1f)
+        )
+        val sortedList=unsortedList.sortedByRating()
+
+        //If element at a position has value x, the element at position x+1 has to have the same or a smaller value
+        var nextRatingWasBigger=false
+        sortedList.forEachIndexed { index, game ->
+            if(index!=0){//Jump over first value
+                if(sortedList[index-1].rating<game.rating){//Check if previous value wasn't bigger or equal
+                    nextRatingWasBigger=true
+                }
+            }
+        }
+
+        assert(!nextRatingWasBigger)
+    }
+
 
 
 

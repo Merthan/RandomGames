@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mainViewModel: MainViewModel by viewModel()//Injection by Koin
 
+    //All of the animation logic is inside of the Adapter or rather the ListAdapter class
     private val adapter: GameAdapter by lazy { GameAdapter() }
 
     private val layoutManager by lazy { LinearLayoutManager(this@MainActivity) }
@@ -82,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
 
                 val shuffling=(sender as ObservableBoolean).get()//Get boolean value by casting
-                //Set Toast message depending on shuffling state (opposite)
+                //Set Toast message depending on shuffling state
                 val message=if(shuffling) R.string.toast_message_shuffling else R.string.toast_message_not_shuffling
                 Toast.makeText(this@MainActivity,message, Toast.LENGTH_SHORT).show()
             }
