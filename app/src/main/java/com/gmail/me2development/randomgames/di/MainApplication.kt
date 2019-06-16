@@ -1,7 +1,8 @@
-package com.gmail.me2development.randomgames
+package com.gmail.me2development.randomgames.di
 
 import android.app.Application
 import com.gmail.me2development.randomgames.data.Repository
+import com.gmail.me2development.randomgames.ui.viewmodels.MainViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.android.viewmodel.dsl.viewModel
@@ -9,8 +10,7 @@ import org.koin.core.context.startKoin
 import org.koin.dsl.module
 
 
-
-
+//Application class which sets up Koin
 class MainApplication :Application(){
 
 
@@ -18,14 +18,9 @@ class MainApplication :Application(){
         super.onCreate()
         // Start Koin
         startKoin {
-            // use AndroidLogger as Koin Logger - default Level.INFO
             androidLogger()
-
-            // use the Android context given there
             androidContext(this@MainApplication)
-
-            // module
-            modules(listOf(applicationModule))
+            modules(applicationModule)
         }
     }
 
@@ -33,6 +28,5 @@ class MainApplication :Application(){
 
 val applicationModule= module {
     single { Repository() }
-    factory { GameAdapter() }//Has connection to binding, so no singleton
     viewModel { MainViewModel(get()) }
 }

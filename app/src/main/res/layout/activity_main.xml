@@ -4,7 +4,7 @@
 
     <data>
         <variable name="viewModel"
-                  type="com.gmail.me2development.randomgames.MainViewModel"/>
+                  type="com.gmail.me2development.randomgames.ui.viewmodels.MainViewModel"/>
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -13,7 +13,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.MainActivity">
+            tools:context=".ui.activities.MainActivity">
 
         <com.google.android.material.appbar.AppBarLayout
                 android:layout_height="wrap_content"
@@ -22,6 +22,7 @@
 
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
+                    app:title="@string/app_name"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"

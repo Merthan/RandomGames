@@ -1,8 +1,6 @@
-package com.gmail.me2development.randomgames.ui
+package com.gmail.me2development.randomgames.ui.activities
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,13 +8,12 @@ import androidx.databinding.Observable
 import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.gmail.me2development.randomgames.GameAdapter
-import com.gmail.me2development.randomgames.MainViewModel
 import com.gmail.me2development.randomgames.R
 import com.gmail.me2development.randomgames.databinding.ActivityMainBinding
+import com.gmail.me2development.randomgames.model.GameAdapter
+import com.gmail.me2development.randomgames.ui.viewmodels.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -42,9 +39,9 @@ binding etc.
  */
 class MainActivity : AppCompatActivity() {
 
-    private val mainViewModel: MainViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()//Injection by Koin
 
-    private val adapter: GameAdapter by inject()
+    private val adapter: GameAdapter by lazy { GameAdapter() }
 
     private val layoutManager by lazy { LinearLayoutManager(this@MainActivity) }
 
@@ -61,14 +58,10 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerView()
 
-
         //When a change has been detected, tell adapter that the list has changed
         mainViewModel.gameList.observe(this, Observer {
-            adapter.submitList(it.sortedBy { game -> -game.rating })
+            adapter.submitList(it)
         })
-
-
-
     }
 
     private fun setupRecyclerView(){
@@ -89,41 +82,12 @@ class MainActivity : AppCompatActivity() {
             override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
 
                 val shuffling=(sender as ObservableBoolean).get()//Get boolean value by casting
-
                 //Set Toast message depending on shuffling state (opposite)
-                val message=if(shuffling) R.string.toast_message_not_shuffling else R.string.toast_message_shuffling
-
+                val message=if(shuffling) R.string.toast_message_shuffling else R.string.toast_message_not_shuffling
                 Toast.makeText(this@MainActivity,message, Toast.LENGTH_SHORT).show()
-
             }
         })
-
     }
-
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
 
 
 }
-
-/*@BindingAdapter("android:rating")
-fun setRating(view: MaterialRatingBar, rating: Float) {
-    if (view.rating != rating) {
-        view.rating = rating
-    }
-}*/

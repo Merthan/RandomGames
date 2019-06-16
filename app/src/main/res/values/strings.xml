@@ -4,4 +4,5 @@
 
     <string name="toast_message_shuffling">Started Rating Games Randomly</string>
     <string name="toast_message_not_shuffling">Stopped Rating Games Randomly</string>
+    <string name="placeholder_image">Placeholder Image</string>
 </resources>

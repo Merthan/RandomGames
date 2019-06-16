@@ -28,13 +28,13 @@
                     tools:src="@mipmap/ic_launcher"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:layout_marginLeft="8dp"
+                    android:layout_marginStart="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-            />
+                    android:contentDescription="@string/placeholder_image"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                     android:textStyle="bold"
@@ -50,8 +50,9 @@
                     android:paddingTop="2dp"
                     android:singleLine="true"
                     android:text="@{game.name}"
+                    android:textSize="16sp"
                     tools:text="Tales from the Borderlands"
-                    android:ellipsize="middle"
+                    android:ellipsize="end"
                     app:autoSizeTextType="uniform"
                     android:textAlignment="center"/>
 
