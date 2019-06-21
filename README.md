@@ -19,6 +19,7 @@ A Coding Challenge from 2019 including Kotlin, Koin, Databinding, MVVM, Coroutin
 *I used Kotlin Coroutines, and the button is a FAB with an Icon*
 
 >### Notes:
+
 >1. Feel free to use any UI elements or library.
 
 *I didn't use any external UI stuff, even though I considered it at the beginning*
